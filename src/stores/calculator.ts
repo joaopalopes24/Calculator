@@ -1,3 +1,4 @@
+// ** External Imports
 import { defineStore } from "pinia";
 
 type HistoryItem = {
@@ -19,8 +20,28 @@ export const useCalculatorStore = defineStore("calculator", {
   }),
 
   actions: {
+    clearHistory() {
+      this.history = [];
+    },
+
+    clearExpression() {
+      this.expression = "";
+    },
+
+    pushExpression(char: string) {
+      this.expression += char;
+    },
+
+    replaceExpression(expression: string) {
+      this.expression = expression;
+    },
+
+    removeLastCharacter() {
+      this.expression = this.expression.slice(0, -1);
+    },
+
     addToHistory(expression: string, result: string) {
-      //
+      this.history.push({ expression, result });
     },
   },
 

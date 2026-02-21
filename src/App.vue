@@ -1,25 +1,20 @@
 <script setup lang="ts">
+// ** External Imports
 import { storeToRefs } from "pinia";
+
+// ** Local Imports
 import CalculatorHeader from "@/components/CalculatorHeader.vue";
 import HistoryRow from "@/components/HistoryRow.vue";
 import CalculatorInput from "@/components/CalculatorInput.vue";
 import CalculatorButton from "@/components/CalculatorButton.vue";
 import { useCalculatorStore } from "@/stores/calculator";
+import { useCalculatorInput } from "@/composables/useCalculatorInput";
 
 const store = useCalculatorStore();
 
 const { expression } = storeToRefs(store);
 
-function handlePress(char: string) {
-  if (char === "C") {
-    store.expression = "";
-    return;
-  }
-
-  if (char === "=" || char === "%") return;
-
-  store.expression += char;
-}
+const { handlePress } = useCalculatorInput();
 </script>
 
 <template>
@@ -36,13 +31,12 @@ function handlePress(char: string) {
           <div
             class="grid grid-cols-[1fr_auto_1fr] gap-x-4 w-full items-center"
           >
-            <HistoryRow expression="8×9" result="72" />
-
-            <HistoryRow expression="72×(9-3)" result="432" />
-
-            <HistoryRow expression="8×9" result="72" />
-
-            <HistoryRow expression="72×(9-3)" result="432" />
+            <HistoryRow
+              :key="index"
+              :result="item.result"
+              :expression="item.expression"
+              v-for="(item, index) in store.history"
+            />
           </div>
         </div>
 
@@ -51,6 +45,7 @@ function handlePress(char: string) {
 
       <div class="border-t border-neutral-700 p-3">
         <div class="grid grid-cols-5 grid-auto-rows-[3.5rem] gap-2">
+          <!-- Row 1 -->
           <CalculatorButton char="C" v-on:press="handlePress">
             C
           </CalculatorButton>
@@ -67,6 +62,7 @@ function handlePress(char: string) {
             π
           </CalculatorButton>
 
+          <!-- Row 2 -->
           <CalculatorButton char="7" variant="num" v-on:press="handlePress">
             7
           </CalculatorButton>
@@ -83,6 +79,7 @@ function handlePress(char: string) {
             √
           </CalculatorButton>
 
+          <!-- Row 3 -->
           <CalculatorButton char="4" variant="num" v-on:press="handlePress">
             4
           </CalculatorButton>
@@ -95,10 +92,11 @@ function handlePress(char: string) {
           <CalculatorButton char="×" v-on:press="handlePress">
             ×
           </CalculatorButton>
-          <CalculatorButton char="x²" v-on:press="handlePress">
+          <CalculatorButton char="²" v-on:press="handlePress">
             x²
           </CalculatorButton>
 
+          <!-- Row 4 -->
           <CalculatorButton char="1" variant="num" v-on:press="handlePress">
             1
           </CalculatorButton>
@@ -115,6 +113,7 @@ function handlePress(char: string) {
             =
           </CalculatorButton>
 
+          <!-- Row 5 -->
           <CalculatorButton char="0" variant="num" v-on:press="handlePress">
             0
           </CalculatorButton>

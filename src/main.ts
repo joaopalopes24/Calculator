@@ -1,8 +1,11 @@
-import "./style.css";
-import App from "./App.vue";
+// ** External Imports
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+
+// ** Local Imports
+import "./style.css";
+import App from "./App.vue";
 
 const app = createApp(App);
 
