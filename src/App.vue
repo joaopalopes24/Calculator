@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import CalculatorHeader from '@/components/CalculatorHeader.vue'
-import HistoryRow from '@/components/HistoryRow.vue'
-import CalculatorInput from '@/components/CalculatorInput.vue'
-import CalculatorButton from '@/components/CalculatorButton.vue'
+import CalculatorHeader from "@/components/CalculatorHeader.vue";
+import HistoryRow from "@/components/HistoryRow.vue";
+import CalculatorInput from "@/components/CalculatorInput.vue";
+import CalculatorButton from "@/components/CalculatorButton.vue";
 </script>
 
 <template>
   <div class="min-h-screen bg-neutral-900 flex flex-col items-center justify-center p-4">
-    <div
-      class="w-full max-w-sm rounded-2xl overflow-hidden border border-neutral-700 bg-neutral-800 shadow-lg"
-    >
+    <div class="w-full max-w-sm rounded-2xl overflow-hidden border border-neutral-700 bg-neutral-800 shadow-lg">
       <CalculatorHeader />
 
       <section class="px-5 py-5 flex flex-col min-h-52">
