@@ -1,15 +1,22 @@
 <script setup lang="ts">
 defineProps({
+  char: {
+    required: true,
+    type: String,
+  },
   variant: {
     default: "default",
     type: String as () => "num" | "equals" | "default",
   },
 });
+
+const emit = defineEmits(["press"]);
 </script>
 
 <template>
   <button
     type="button"
+    v-on:click="emit('press', char)"
     :class="{
       'rounded-xl text-lg font-medium flex items-center justify-center transition-colors min-h-14': true,
       'bg-neutral-500 text-neutral-50 hover:bg-neutral-400 active:bg-neutral-300': variant === 'num',
