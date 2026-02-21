@@ -14,6 +14,7 @@ const emit = defineEmits(["press"]);
 </script>
 
 <template>
+  <!-- prettier-ignore -->
   <button
     type="button"
     v-on:click="emit('press', char)"

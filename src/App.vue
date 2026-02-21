@@ -23,13 +23,19 @@ function handlePress(char: string) {
 </script>
 
 <template>
-  <div class="min-h-screen bg-neutral-900 flex flex-col items-center justify-center p-4">
-    <div class="w-full max-w-sm rounded-2xl overflow-hidden border border-neutral-700 bg-neutral-800 shadow-lg">
+  <div
+    class="min-h-screen bg-neutral-900 flex flex-col items-center justify-center p-4"
+  >
+    <div
+      class="w-full max-w-sm rounded-2xl overflow-hidden border border-neutral-700 bg-neutral-800 shadow-lg"
+    >
       <CalculatorHeader />
 
       <section class="px-5 py-5 flex flex-col min-h-52">
         <div class="flex-1 flex flex-col justify-end min-h-0">
-          <div class="grid grid-cols-[1fr_auto_1fr] gap-x-4 w-full items-center">
+          <div
+            class="grid grid-cols-[1fr_auto_1fr] gap-x-4 w-full items-center"
+          >
             <HistoryRow expression="8×9" result="72" />
 
             <HistoryRow expression="72×(9-3)" result="432" />
@@ -45,34 +51,82 @@ function handlePress(char: string) {
 
       <div class="border-t border-neutral-700 p-3">
         <div class="grid grid-cols-5 grid-auto-rows-[3.5rem] gap-2">
-          <CalculatorButton char="C" v-on:press="handlePress">C</CalculatorButton>
-          <CalculatorButton char="(" v-on:press="handlePress">(</CalculatorButton>
-          <CalculatorButton char=")" v-on:press="handlePress">)</CalculatorButton>
-          <CalculatorButton char="mod" v-on:press="handlePress">mod</CalculatorButton>
-          <CalculatorButton char="π" v-on:press="handlePress">π</CalculatorButton>
+          <CalculatorButton char="C" v-on:press="handlePress">
+            C
+          </CalculatorButton>
+          <CalculatorButton char="(" v-on:press="handlePress">
+            (
+          </CalculatorButton>
+          <CalculatorButton char=")" v-on:press="handlePress">
+            )
+          </CalculatorButton>
+          <CalculatorButton char="mod" v-on:press="handlePress">
+            mod
+          </CalculatorButton>
+          <CalculatorButton char="π" v-on:press="handlePress">
+            π
+          </CalculatorButton>
 
-          <CalculatorButton variant="num" char="7" v-on:press="handlePress">7</CalculatorButton>
-          <CalculatorButton variant="num" char="8" v-on:press="handlePress">8</CalculatorButton>
-          <CalculatorButton variant="num" char="9" v-on:press="handlePress">9</CalculatorButton>
-          <CalculatorButton char="÷" v-on:press="handlePress">÷</CalculatorButton>
-          <CalculatorButton char="√" v-on:press="handlePress">√</CalculatorButton>
+          <CalculatorButton char="7" variant="num" v-on:press="handlePress">
+            7
+          </CalculatorButton>
+          <CalculatorButton char="8" variant="num" v-on:press="handlePress">
+            8
+          </CalculatorButton>
+          <CalculatorButton char="9" variant="num" v-on:press="handlePress">
+            9
+          </CalculatorButton>
+          <CalculatorButton char="÷" v-on:press="handlePress">
+            ÷
+          </CalculatorButton>
+          <CalculatorButton char="√" v-on:press="handlePress">
+            √
+          </CalculatorButton>
 
-          <CalculatorButton variant="num" char="4" v-on:press="handlePress">4</CalculatorButton>
-          <CalculatorButton variant="num" char="5" v-on:press="handlePress">5</CalculatorButton>
-          <CalculatorButton variant="num" char="6" v-on:press="handlePress">6</CalculatorButton>
-          <CalculatorButton char="×" v-on:press="handlePress">×</CalculatorButton>
-          <CalculatorButton char="x²" v-on:press="handlePress">x²</CalculatorButton>
+          <CalculatorButton char="4" variant="num" v-on:press="handlePress">
+            4
+          </CalculatorButton>
+          <CalculatorButton char="5" variant="num" v-on:press="handlePress">
+            5
+          </CalculatorButton>
+          <CalculatorButton char="6" variant="num" v-on:press="handlePress">
+            6
+          </CalculatorButton>
+          <CalculatorButton char="×" v-on:press="handlePress">
+            ×
+          </CalculatorButton>
+          <CalculatorButton char="x²" v-on:press="handlePress">
+            x²
+          </CalculatorButton>
 
-          <CalculatorButton variant="num" char="1" v-on:press="handlePress">1</CalculatorButton>
-          <CalculatorButton variant="num" char="2" v-on:press="handlePress">2</CalculatorButton>
-          <CalculatorButton variant="num" char="3" v-on:press="handlePress">3</CalculatorButton>
-          <CalculatorButton char="−" v-on:press="handlePress">−</CalculatorButton>
-          <CalculatorButton variant="equals" char="=" v-on:press="handlePress">=</CalculatorButton>
+          <CalculatorButton char="1" variant="num" v-on:press="handlePress">
+            1
+          </CalculatorButton>
+          <CalculatorButton char="2" variant="num" v-on:press="handlePress">
+            2
+          </CalculatorButton>
+          <CalculatorButton char="3" variant="num" v-on:press="handlePress">
+            3
+          </CalculatorButton>
+          <CalculatorButton char="−" v-on:press="handlePress">
+            −
+          </CalculatorButton>
+          <CalculatorButton char="=" variant="equals" v-on:press="handlePress">
+            =
+          </CalculatorButton>
 
-          <CalculatorButton variant="num" char="0" v-on:press="handlePress">0</CalculatorButton>
-          <CalculatorButton char="." v-on:press="handlePress">.</CalculatorButton>
-          <CalculatorButton char="%" v-on:press="handlePress">%</CalculatorButton>
-          <CalculatorButton char="+" v-on:press="handlePress">+</CalculatorButton>
+          <CalculatorButton char="0" variant="num" v-on:press="handlePress">
+            0
+          </CalculatorButton>
+          <CalculatorButton char="." v-on:press="handlePress">
+            .
+          </CalculatorButton>
+          <CalculatorButton char="%" v-on:press="handlePress">
+            %
+          </CalculatorButton>
+          <CalculatorButton char="+" v-on:press="handlePress">
+            +
+          </CalculatorButton>
         </div>
       </div>
     </div>
