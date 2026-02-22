@@ -18,6 +18,10 @@ const model = defineModel({
 
 const inputEl = useTemplateRef<HTMLInputElement>("inputEl");
 
+function mappedChar(c: string): string {
+  return get(KEY_TO_CHAR, c) ?? c;
+}
+
 function syncInputValue() {
   nextTick(() => {
     if (inputEl.value) {
@@ -30,38 +34,28 @@ const inputModel = computed({
   get: () => model.value,
   set: (value: string) => {
     const oldVal = model.value;
-    const newVal = value.replace(/\s/g, "");
+    const newVal = value;
 
     if (newVal === oldVal) {
       syncInputValue();
       return;
     }
 
-    if (newVal.length === oldVal.length + 1) {
-      for (let i = 0; i < newVal.length; i++) {
-        if (newVal.slice(0, i) + newVal.slice(i + 1) === oldVal) {
-          const char = get(KEY_TO_CHAR, newVal.charAt(i));
-
-          if (char) handlePress(char);
-
-          break;
-        }
-      }
+    if (newVal.length === 0) {
+      model.value = "";
     } else if (
-      newVal.length === oldVal.length - 1 &&
+      newVal.length < oldVal.length &&
       (oldVal.startsWith(newVal) || oldVal.endsWith(newVal))
     ) {
-      model.value = newVal;
-    } else if (newVal.length === 0) {
-      model.value = "";
+      model.value = newVal.split("").map(mappedChar).join("");
+    } else if (newVal.startsWith(oldVal) && newVal.length > oldVal.length) {
+      const appended = newVal.slice(oldVal.length);
+
+      appended.split("").forEach((c) => handlePress(mappedChar(c)));
     } else {
       model.value = "";
 
-      newVal.split("").forEach((c) => {
-        const char = get(KEY_TO_CHAR, c);
-
-        if (char) handlePress(char);
-      });
+      newVal.split("").forEach((c) => handlePress(mappedChar(c)));
     }
 
     syncInputValue();

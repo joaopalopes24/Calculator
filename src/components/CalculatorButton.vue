@@ -1,4 +1,7 @@
 <script setup lang="ts">
+// ** Local Imports
+import { useCalculatorInput } from "@/composables/useCalculatorInput";
+
 defineProps({
   char: {
     required: true,
@@ -6,19 +9,20 @@ defineProps({
   },
   variant: {
     default: "default",
-    type: String as () => "num" | "equals" | "default",
+    type: String as () => "num" | "clear" | "equals" | "default",
   },
 });
 
-const emit = defineEmits(["press"]);
+const { handlePress } = useCalculatorInput();
 </script>
 
 <template>
   <!-- prettier-ignore -->
   <button
     type="button"
-    v-on:click="emit('press', char)"
+    v-on:click="handlePress(char)"
     :class="{
+      'bg-red-500 text-white hover:bg-red-600 active:bg-red-700': variant === 'clear',
       'rounded-xl text-lg font-medium flex items-center justify-center transition-colors min-h-14': true,
       'bg-neutral-500 text-neutral-50 hover:bg-neutral-400 active:bg-neutral-300': variant === 'num',
       'bg-neutral-700 text-neutral-200 hover:bg-neutral-600 active:bg-neutral-500': variant === 'default',

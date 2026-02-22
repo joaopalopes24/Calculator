@@ -64,8 +64,6 @@ export function useCalculatorInput() {
       return;
     }
 
-    if (char === "%") return;
-
     if (char === "=") {
       handleEquals();
       return;
@@ -75,10 +73,8 @@ export function useCalculatorInput() {
       if (store.expression.slice(-1) === "×") {
         store.removeLastCharacter();
         store.pushExpression("²");
-      } else {
-        store.pushExpression("×");
+        return;
       }
-      return;
     }
 
     store.pushExpression(char);
