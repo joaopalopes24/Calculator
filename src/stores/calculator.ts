@@ -7,14 +7,12 @@ type HistoryItem = {
 };
 
 interface CalculatorState {
-  result: string;
   expression: string;
   history: HistoryItem[];
 }
 
 export const useCalculatorStore = defineStore("calculator", {
   state: (): CalculatorState => ({
-    result: "",
     history: [],
     expression: "",
   }),
@@ -32,6 +30,10 @@ export const useCalculatorStore = defineStore("calculator", {
       this.expression += char;
     },
 
+    removeFromHistory(index: number) {
+      this.history.splice(index, 1);
+    },
+
     replaceExpression(expression: string) {
       this.expression = expression;
     },
@@ -45,5 +47,7 @@ export const useCalculatorStore = defineStore("calculator", {
     },
   },
 
-  persist: true,
+  persist: {
+    pick: ["history"],
+  },
 });

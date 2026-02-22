@@ -33,6 +33,7 @@ const { handlePress } = useCalculatorInput();
           >
             <HistoryRow
               :key="index"
+              :index="index"
               :result="item.result"
               :expression="item.expression"
               v-for="(item, index) in store.history"
