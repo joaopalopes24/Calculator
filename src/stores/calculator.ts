@@ -9,12 +9,14 @@ type HistoryItem = {
 interface CalculatorState {
   expression: string;
   history: HistoryItem[];
+  errorMessage: string | null;
 }
 
 export const useCalculatorStore = defineStore("calculator", {
   state: (): CalculatorState => ({
     history: [],
     expression: "",
+    errorMessage: null,
   }),
 
   actions: {
@@ -28,6 +30,14 @@ export const useCalculatorStore = defineStore("calculator", {
 
     pushExpression(char: string) {
       this.expression += char;
+    },
+
+    clearError() {
+      this.errorMessage = null;
+    },
+
+    setError(message: string) {
+      this.errorMessage = message;
     },
 
     removeFromHistory(index: number) {

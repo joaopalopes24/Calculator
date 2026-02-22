@@ -7,6 +7,7 @@ import CalculatorHeader from "@/components/CalculatorHeader.vue";
 import HistoryRow from "@/components/HistoryRow.vue";
 import CalculatorInput from "@/components/CalculatorInput.vue";
 import CalculatorButton from "@/components/CalculatorButton.vue";
+import CalculatorError from "@/components/CalculatorError.vue";
 import { useCalculatorStore } from "@/stores/calculator";
 
 const store = useCalculatorStore();
@@ -23,7 +24,7 @@ const { expression } = storeToRefs(store);
     >
       <CalculatorHeader />
 
-      <section class="px-5 py-5 flex flex-col min-h-52">
+      <section class="relative px-5 py-5 flex flex-col min-h-52">
         <div class="flex-1 flex flex-col justify-end min-h-0">
           <div
             class="grid grid-cols-[1fr_auto_1fr] gap-x-4 w-full items-center"
@@ -39,6 +40,8 @@ const { expression } = storeToRefs(store);
         </div>
 
         <CalculatorInput v-model="expression" />
+
+        <CalculatorError />
       </section>
 
       <div class="border-t border-neutral-700 p-3">

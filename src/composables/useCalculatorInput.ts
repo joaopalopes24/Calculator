@@ -3,6 +3,7 @@ import { onMounted, onUnmounted } from "vue";
 import { get, trim } from "es-toolkit/compat";
 
 // ** Local Imports
+import { useCalculatorEval } from "@/composables/useCalculatorEval";
 import { useCalculatorStore } from "@/stores/calculator";
 
 export const KEY_TO_CHAR: Record<string, string> = {
@@ -48,18 +49,29 @@ function isInputTarget(target: EventTarget | null): boolean {
 export function useCalculatorInput() {
   const store = useCalculatorStore();
 
+  const { evaluate } = useCalculatorEval();
+
   function handleEquals() {
     const expr = trim(store.expression);
 
     if (!expr) return;
 
-    store.addToHistory(expr, "0");
+    try {
+      const result = evaluate(expr);
 
-    store.clearExpression();
+      store.addToHistory(expr, String(result));
+      store.replaceExpression(`${result}`);
+      store.clearError();
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Calculation error.";
+
+      store.setError(message);
+    }
   }
 
   function handlePress(char: string) {
     if (char === "C") {
+      store.clearError();
       store.clearExpression();
       return;
     }
@@ -73,10 +85,12 @@ export function useCalculatorInput() {
       if (store.expression.slice(-1) === "×") {
         store.removeLastCharacter();
         store.pushExpression("²");
+        store.clearError();
         return;
       }
     }
 
+    store.clearError();
     store.pushExpression(char);
   }
 
@@ -95,6 +109,7 @@ export function useCalculatorInput() {
 
     if (e.key === "Backspace") {
       e.preventDefault();
+      store.clearError();
       store.removeLastCharacter();
       return;
     }

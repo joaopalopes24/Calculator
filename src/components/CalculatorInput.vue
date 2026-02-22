@@ -8,6 +8,9 @@ import {
   KEY_TO_CHAR,
   useCalculatorInput,
 } from "@/composables/useCalculatorInput";
+import { useCalculatorStore } from "@/stores/calculator";
+
+const store = useCalculatorStore();
 
 const { handlePress } = useCalculatorInput();
 
@@ -40,6 +43,8 @@ const inputModel = computed({
       syncInputValue();
       return;
     }
+
+    store.clearError();
 
     if (newVal.length === 0) {
       model.value = "";

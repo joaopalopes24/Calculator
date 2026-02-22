@@ -30,6 +30,8 @@ function setIsRowHovered(value: boolean) {
 }
 
 function onRowClick() {
+  store.clearError();
+
   store.replaceExpression(props.expression);
 }
 
