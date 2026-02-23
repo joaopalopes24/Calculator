@@ -23,8 +23,8 @@ describe("useCalculatorEval / evaluate", () => {
 
     it("divides two numbers", () => {
       expect(evaluate("6÷2")).toBe(3);
-      expect(evaluate("6/2")).toBe(3);
-      expect(evaluate("1/2")).toBe(0.5);
+      expect(evaluate("6÷2")).toBe(3);
+      expect(evaluate("1÷2")).toBe(0.5);
     });
 
     it("evaluates chained operations", () => {
@@ -92,6 +92,25 @@ describe("useCalculatorEval / evaluate", () => {
     });
   });
 
+  describe("modulo (mod)", () => {
+    it("evaluates mod as positive remainder", () => {
+      expect(evaluate("10mod3")).toBe(1);
+      expect(evaluate("5mod2")).toBe(1);
+      expect(evaluate("8mod4")).toBe(0);
+      expect(evaluate("7 mod 2")).toBe(1);
+    });
+
+    it("mod in expression with other operators", () => {
+      expect(evaluate("10mod3+1")).toBe(2);
+      expect(evaluate("2×5mod3")).toBe(1);
+    });
+
+    it("throws on mod by zero", () => {
+      expect(() => evaluate("5mod0")).toThrow(CalculatorEvalError);
+      expect(() => evaluate("5mod0")).toThrow("Divisor cannot be zero.");
+    });
+  });
+
   describe("unary minus", () => {
     it("evaluates unary minus", () => {
       expect(evaluate("−5")).toBe(-5);
@@ -117,7 +136,7 @@ describe("useCalculatorEval / evaluate", () => {
 
   describe("rounding", () => {
     it("rounds floating point for display", () => {
-      expect(evaluate("1.2/6")).toBe(0.2);
+      expect(evaluate("1.2÷6")).toBe(0.2);
       expect(evaluate("0.1+0.2")).toBe(0.3);
     });
   });
@@ -196,6 +215,31 @@ describe("useCalculatorEval / evaluate", () => {
     });
   });
 
+  describe("square root (√)", () => {
+    it("evaluates square root of a number", () => {
+      expect(evaluate("√9")).toBe(3);
+      expect(evaluate("√4")).toBe(2);
+      expect(evaluate("√0")).toBe(0);
+      expect(evaluate("√1")).toBe(1);
+    });
+
+    it("evaluates square root of expression in parentheses", () => {
+      expect(evaluate("√(9+7)")).toBe(4);
+      expect(evaluate("√(2×8)")).toBe(4);
+    });
+
+    it("square root in larger expression", () => {
+      expect(evaluate("√9+1")).toBe(4);
+      expect(evaluate("2×√9")).toBe(6);
+      expect(evaluate("√16−2")).toBe(2);
+    });
+
+    it("throws on square root of negative number", () => {
+      expect(() => evaluate("√(−1)")).toThrow(CalculatorEvalError);
+      expect(() => evaluate("√(−1)")).toThrow("Square root of negative number.");
+    });
+  });
+
   describe("power (²) in complex expressions", () => {
     it("multiple squares in one expression", () => {
       expect(evaluate("2²+3²")).toBe(13);
@@ -218,8 +262,8 @@ describe("useCalculatorEval / evaluate", () => {
     });
 
     it("throws on division by zero", () => {
-      expect(() => evaluate("1/0")).toThrow(CalculatorEvalError);
-      expect(() => evaluate("1/0")).toThrow("Divisor cannot be zero.");
+      expect(() => evaluate("1÷0")).toThrow(CalculatorEvalError);
+      expect(() => evaluate("1÷0")).toThrow("Divisor cannot be zero.");
       expect(() => evaluate("5÷0")).toThrow("Divisor cannot be zero.");
     });
 
@@ -237,7 +281,7 @@ describe("useCalculatorEval / evaluate", () => {
 
     it("throws CalculatorEvalError with correct name", () => {
       try {
-        evaluate("1/0");
+        evaluate("1÷0");
       } catch (err) {
         expect(err).toBeInstanceOf(CalculatorEvalError);
         expect((err as CalculatorEvalError).name).toBe("CalculatorEvalError");

@@ -12,9 +12,11 @@ const INVALID_EXPRESSION = "Invalid expression.";
 const DIVISION_BY_ZERO = "Divisor cannot be zero.";
 const UNBALANCED_PARENS = "Unbalanced parentheses.";
 const UNKNOWN_CHAR = "Unknown character in expression.";
+const SQRT_NEGATIVE = "Square root of negative number.";
 
+// Input normalizes to ÷ and ² before eval; only −/-, ×/* kept for paste/clipboard.
 // prettier-ignore
-type Token = { type: "+" } | { type: "-" } | { type: "*" } | { type: "/" } | { type: "²" } | { type: "%" } | { type: "(" } | { type: ")" } | { type: "eof" } | { type: "number"; value: number };
+type Token = { type: "+" } | { type: "-" } | { type: "*" } | { type: "/" } | { type: "²" } | { type: "%" } | { type: "mod" } | { type: "√" } | { type: "(" } | { type: ")" } | { type: "eof" } | { type: "number"; value: number };
 
 function tokenize(expr: string): Token[] {
   let i = 0;
@@ -65,7 +67,6 @@ function tokenize(expr: string): Token[] {
         tokens.push({ type: "*" });
         i++;
         break;
-      case "/":
       case "÷":
         tokens.push({ type: "/" });
         i++;
@@ -85,6 +86,18 @@ function tokenize(expr: string): Token[] {
       case ")":
         tokens.push({ type: ")" });
         i++;
+        break;
+      case "√":
+        tokens.push({ type: "√" });
+        i++;
+        break;
+      case "m":
+        if (get(s, i + 1) === "o" && get(s, i + 2) === "d") {
+          tokens.push({ type: "mod" });
+          i += 3;
+        } else {
+          throw new Error(UNKNOWN_CHAR);
+        }
         break;
       default:
         throw new Error(UNKNOWN_CHAR);
@@ -133,6 +146,15 @@ export function evaluate(expression: string): number {
 
   function parsePrimary(): number {
     const t = current();
+
+    if (t.type === "√") {
+      consume();
+      const value = parsePrimary();
+
+      if (value < 0) throw new CalculatorEvalError(SQRT_NEGATIVE);
+
+      return Math.sqrt(value);
+    }
 
     if (t.type === "-") {
       consume();
@@ -195,6 +217,13 @@ export function evaluate(expression: string): number {
         if (right === 0) throw new CalculatorEvalError(DIVISION_BY_ZERO);
 
         left /= right;
+      } else if (t.type === "mod") {
+        consume();
+        const right = parseFactor();
+
+        if (right === 0) throw new CalculatorEvalError(DIVISION_BY_ZERO);
+
+        left = ((left % right) + Math.abs(right)) % Math.abs(right);
       } else {
         break;
       }
@@ -223,6 +252,7 @@ export function evaluate(expression: string): number {
   }
 
   const result = parseExpr();
+
   if (current().type !== "eof")
     throw new CalculatorEvalError(INVALID_EXPRESSION);
 
