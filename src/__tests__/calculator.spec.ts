@@ -1,5 +1,8 @@
+// ** External Imports
 import { describe, it, expect, beforeEach } from "vitest";
 import { setActivePinia, createPinia } from "pinia";
+
+// ** Local Imports
 import { useCalculatorStore } from "@/stores/calculator";
 
 describe("calculator store", () => {

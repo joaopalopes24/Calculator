@@ -1,4 +1,7 @@
+// ** External Imports
 import { describe, it, expect } from "vitest";
+
+// ** Local Imports
 import { evaluate, CalculatorEvalError } from "@/composables/useCalculatorEval";
 
 describe("useCalculatorEval / evaluate", () => {

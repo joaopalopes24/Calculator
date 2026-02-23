@@ -1,7 +1,10 @@
+// ** External Imports
 import { describe, it, expect, beforeEach } from "vitest";
 import { mount } from "@vue/test-utils";
 import { h, defineComponent } from "vue";
 import { createPinia, setActivePinia } from "pinia";
+
+// ** Local Imports
 import App from "@/App.vue";
 import { useCalculatorStore } from "@/stores/calculator";
 import { useCalculatorInput } from "@/composables/useCalculatorInput";
@@ -98,6 +101,7 @@ describe("calculator keyboard (outside input)", () => {
 
   it("calls handleEquals on Enter when window receives keydown", async () => {
     const pinia = createPinia();
+    setActivePinia(pinia);
     const store = useCalculatorStore(pinia);
 
     mount(KeyboardTestWrapper, { global: { plugins: [pinia] } });
@@ -116,6 +120,7 @@ describe("calculator keyboard (outside input)", () => {
 
   it("removes last character on Backspace when target is not input", async () => {
     const pinia = createPinia();
+    setActivePinia(pinia);
     const store = useCalculatorStore(pinia);
 
     mount(KeyboardTestWrapper, { global: { plugins: [pinia] } });
@@ -133,6 +138,7 @@ describe("calculator keyboard (outside input)", () => {
 
   it("pushes digit when number key is pressed and target is not input", async () => {
     const pinia = createPinia();
+    setActivePinia(pinia);
     const store = useCalculatorStore(pinia);
 
     mount(KeyboardTestWrapper, { global: { plugins: [pinia] } });

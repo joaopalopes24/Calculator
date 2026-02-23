@@ -1,7 +1,10 @@
+// ** External Imports
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import { createPinia } from "pinia";
-import App from "../App.vue";
+
+// ** Local Imports
+import App from "@/App.vue";
 
 describe("App", () => {
   it("mounts and renders the calculator", () => {
