@@ -236,7 +236,9 @@ describe("useCalculatorEval / evaluate", () => {
 
     it("throws on square root of negative number", () => {
       expect(() => evaluate("√(−1)")).toThrow(CalculatorEvalError);
-      expect(() => evaluate("√(−1)")).toThrow("Square root of negative number.");
+      expect(() => evaluate("√(−1)")).toThrow(
+        "Square root of negative number.",
+      );
     });
   });
 

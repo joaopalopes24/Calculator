@@ -95,6 +95,8 @@ export function useCalculatorInput() {
   }
 
   function onKeydown(e: KeyboardEvent) {
+    if (e.repeat) return;
+
     const isInput = isInputTarget(e.target);
 
     const isEnterOrEquals = e.key === "Enter" || e.key === "=";

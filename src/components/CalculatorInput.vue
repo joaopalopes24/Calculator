@@ -10,9 +10,14 @@ import {
 } from "@/composables/useCalculatorInput";
 import { useCalculatorStore } from "@/stores/calculator";
 
-const store = useCalculatorStore();
+const props = defineProps({
+  handlePress: {
+    type: Function,
+    required: true,
+  },
+});
 
-const { handlePress } = useCalculatorInput();
+const store = useCalculatorStore();
 
 const model = defineModel({
   default: "",
@@ -56,11 +61,11 @@ const inputModel = computed({
     } else if (newVal.startsWith(oldVal) && newVal.length > oldVal.length) {
       const appended = newVal.slice(oldVal.length);
 
-      appended.split("").forEach((c) => handlePress(mappedChar(c)));
+      appended.split("").forEach((c) => props.handlePress(mappedChar(c)));
     } else {
       model.value = "";
 
-      newVal.split("").forEach((c) => handlePress(mappedChar(c)));
+      newVal.split("").forEach((c) => props.handlePress(mappedChar(c)));
     }
 
     syncInputValue();

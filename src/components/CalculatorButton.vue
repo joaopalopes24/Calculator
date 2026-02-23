@@ -1,7 +1,4 @@
 <script setup lang="ts">
-// ** Local Imports
-import { useCalculatorInput } from "@/composables/useCalculatorInput";
-
 defineProps({
   char: {
     required: true,
@@ -13,14 +10,14 @@ defineProps({
   },
 });
 
-const { handlePress } = useCalculatorInput();
+const emit = defineEmits(["press"]);
 </script>
 
 <template>
   <!-- prettier-ignore -->
   <button
     type="button"
-    v-on:click="handlePress(char)"
+    v-on:click="emit('press', char)"
     :class="{
       'bg-red-500 text-white hover:bg-red-600 active:bg-red-700': variant === 'clear',
       'rounded-xl text-lg font-medium flex items-center justify-center transition-colors min-h-14': true,
