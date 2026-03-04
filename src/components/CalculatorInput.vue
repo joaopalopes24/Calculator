@@ -81,6 +81,6 @@ const inputModel = computed({
     spellcheck="false"
     v-model="inputModel"
     autocapitalize="off"
-    class="min-h-14 w-full flex items-center justify-end text-neutral-100 text-2xl font-light tracking-tight shrink-0 pt-3 bg-transparent border-none outline-none text-right placeholder-neutral-500"
+    class="min-h-14 w-full flex items-center justify-end text-neutral-900 dark:text-neutral-100 text-2xl font-light tracking-tight shrink-0 pt-3 bg-transparent border-none outline-none text-right placeholder-neutral-400 dark:placeholder-neutral-500"
   />
 </template>

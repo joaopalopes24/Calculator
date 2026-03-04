@@ -48,21 +48,23 @@ function onDeleteClick(e: MouseEvent) {
       v-on:click="onRowClick"
       v-on:mouseenter="setIsRowHovered(true)"
       v-on:mouseleave="setIsRowHovered(false)"
-      class="flex items-center gap-x-2 px-3 py-1.5 text-sm cursor-pointer select-none hover:bg-neutral-700/30 active:bg-neutral-700/50 rounded-lg"
+      class="flex items-center gap-x-2 px-3 py-1.5 text-sm cursor-pointer select-none hover:bg-neutral-200 dark:hover:bg-neutral-700/30 active:bg-neutral-300 dark:active:bg-neutral-700/50 rounded-lg"
     >
       <div
         class="flex-1 min-w-0 grid grid-cols-[1fr_auto_1fr] gap-x-4 items-center"
       >
         <span
-          class="text-left text-neutral-400 overflow-hidden text-ellipsis whitespace-nowrap"
+          class="text-left text-neutral-500 dark:text-neutral-400 overflow-hidden text-ellipsis whitespace-nowrap"
         >
           {{ expression }}
         </span>
 
-        <span class="text-center text-neutral-500">=</span>
+        <span class="text-center text-neutral-400 dark:text-neutral-500"
+          >=</span
+        >
 
         <span
-          class="text-right font-semibold text-neutral-300 overflow-hidden text-ellipsis whitespace-nowrap"
+          class="text-right font-semibold text-neutral-700 dark:text-neutral-300 overflow-hidden text-ellipsis whitespace-nowrap"
         >
           {{ result }}
         </span>
@@ -86,6 +88,9 @@ function onDeleteClick(e: MouseEvent) {
       </div>
     </div>
 
-    <div class="mx-1 border-b border-neutral-700" aria-hidden="true"></div>
+    <div
+      aria-hidden="true"
+      class="mx-1 border-b border-neutral-200 dark:border-neutral-700"
+    ></div>
   </div>
 </template>
