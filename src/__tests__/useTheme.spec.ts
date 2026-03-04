@@ -1,6 +1,6 @@
 // ** External Imports
 import { mount } from "@vue/test-utils";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import { defineComponent, nextTick } from "vue";
 
 function resetDom() {
@@ -27,14 +27,14 @@ describe("useTheme", () => {
     resetDom();
   });
 
-  it("defaults to dark when localStorage is empty", async () => {
+  test("it should default to dark when localStorage is empty", async () => {
     await mountThemeComponent();
     await nextTick();
 
     expect(document.documentElement.classList.contains("dark")).toBe(true);
   });
 
-  it("reads initial value from localStorage (light)", async () => {
+  test("it should read initial value from localStorage (light)", async () => {
     window.localStorage.setItem("calculator-theme", "light");
 
     await mountThemeComponent();
@@ -43,7 +43,7 @@ describe("useTheme", () => {
     expect(document.documentElement.classList.contains("dark")).toBe(false);
   });
 
-  it("reads initial value from localStorage (dark)", async () => {
+  test("it should read initial value from localStorage (dark)", async () => {
     window.localStorage.setItem("calculator-theme", "dark");
 
     await mountThemeComponent();
@@ -52,7 +52,7 @@ describe("useTheme", () => {
     expect(document.documentElement.classList.contains("dark")).toBe(true);
   });
 
-  it("toggles theme and persists to localStorage", async () => {
+  test("it should toggle theme and persist to localStorage", async () => {
     const wrapper = await mountThemeComponent();
 
     await nextTick();
