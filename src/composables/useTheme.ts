@@ -9,9 +9,17 @@ function getStored(): boolean {
 
   const stored = localStorage.getItem(STORAGE_KEY);
 
+  if (stored === "dark") return true;
+
   if (stored === "light") return false;
 
-  if (stored === "dark") return true;
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    return true;
+  }
+
+  if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+    return false;
+  }
 
   return true;
 }

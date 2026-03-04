@@ -25,6 +25,10 @@ describe("useTheme", () => {
   beforeEach(() => {
     vi.resetModules();
     resetDom();
+
+    window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+      matches: query === "(prefers-color-scheme: dark)",
+    }));
   });
 
   test("it should default to dark when localStorage is empty", async () => {
