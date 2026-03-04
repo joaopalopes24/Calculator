@@ -1,13 +1,10 @@
 <script setup lang="ts">
 // ** External Imports
-import { computed, nextTick, useTemplateRef } from "vue";
 import { get } from "es-toolkit/compat";
+import { computed, nextTick, useTemplateRef } from "vue";
 
 // ** Local Imports
-import {
-  KEY_TO_CHAR,
-  useCalculatorInput,
-} from "@/composables/useCalculatorInput";
+import { KEY_TO_CHAR } from "@/composables/useCalculatorInput";
 import { useCalculatorStore } from "@/stores/calculator";
 
 const props = defineProps({

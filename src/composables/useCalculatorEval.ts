@@ -15,8 +15,19 @@ const UNKNOWN_CHAR = "Unknown character in expression.";
 const SQRT_NEGATIVE = "Square root of negative number.";
 
 // Input normalizes to ÷ and ² before eval; only −/-, ×/* kept for paste/clipboard.
-// prettier-ignore
-type Token = { type: "+" } | { type: "-" } | { type: "*" } | { type: "/" } | { type: "²" } | { type: "%" } | { type: "mod" } | { type: "√" } | { type: "(" } | { type: ")" } | { type: "eof" } | { type: "number"; value: number };
+type Token =
+  | { type: "+" }
+  | { type: "-" }
+  | { type: "*" }
+  | { type: "/" }
+  | { type: "²" }
+  | { type: "%" }
+  | { type: "√" }
+  | { type: "(" }
+  | { type: ")" }
+  | { type: "eof" }
+  | { type: "mod" }
+  | { type: "number"; value: number };
 
 function tokenize(expr: string): Token[] {
   let i = 0;

@@ -1,14 +1,14 @@
 // ** External Imports
-import { describe, it, expect, beforeEach } from "vitest";
 import { mount } from "@vue/test-utils";
-import { h, defineComponent } from "vue";
 import { createPinia, setActivePinia } from "pinia";
+import { beforeEach, describe, expect, it } from "vitest";
+import { defineComponent, h } from "vue";
 
 // ** Local Imports
 import App from "@/App.vue";
-import { useCalculatorStore } from "@/stores/calculator";
-import { useCalculatorInput } from "@/composables/useCalculatorInput";
 import HistoryRow from "@/components/HistoryRow.vue";
+import { useCalculatorInput } from "@/composables/useCalculatorInput";
+import { useCalculatorStore } from "@/stores/calculator";
 
 const KeyboardTestWrapper = defineComponent({
   setup() {

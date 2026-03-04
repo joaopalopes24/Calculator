@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // External Imports
-import { ref } from "vue";
 import { Trash2 } from "lucide-vue-next";
+import { ref } from "vue";
 
 // Local Imports
 import { useCalculatorStore } from "@/stores/calculator";

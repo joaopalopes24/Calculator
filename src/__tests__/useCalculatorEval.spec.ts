@@ -1,8 +1,8 @@
 // ** External Imports
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 
 // ** Local Imports
-import { evaluate, CalculatorEvalError } from "@/composables/useCalculatorEval";
+import { CalculatorEvalError, evaluate } from "@/composables/useCalculatorEval";
 
 describe("useCalculatorEval / evaluate", () => {
   describe("basic arithmetic", () => {

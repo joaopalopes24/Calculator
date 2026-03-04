@@ -1,6 +1,6 @@
 // ** External Imports
-import { describe, it, expect, beforeEach } from "vitest";
-import { setActivePinia, createPinia } from "pinia";
+import { createPinia, setActivePinia } from "pinia";
+import { beforeEach, describe, expect, it } from "vitest";
 
 // ** Local Imports
 import { useCalculatorStore } from "@/stores/calculator";

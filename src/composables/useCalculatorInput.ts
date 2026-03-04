@@ -1,6 +1,6 @@
 // ** External Imports
-import { onMounted, onUnmounted } from "vue";
 import { get, trim } from "es-toolkit/compat";
+import { onMounted, onUnmounted } from "vue";
 
 // ** Local Imports
 import { useCalculatorEval } from "@/composables/useCalculatorEval";

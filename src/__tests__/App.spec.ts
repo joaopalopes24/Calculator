@@ -1,7 +1,7 @@
 // ** External Imports
-import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import { createPinia } from "pinia";
+import { describe, expect, it } from "vitest";
 
 // ** Local Imports
 import App from "@/App.vue";

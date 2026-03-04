@@ -3,13 +3,13 @@
 import { storeToRefs } from "pinia";
 
 // ** Local Imports
-import CalculatorHeader from "@/components/CalculatorHeader.vue";
-import HistoryRow from "@/components/HistoryRow.vue";
-import CalculatorInput from "@/components/CalculatorInput.vue";
 import CalculatorButton from "@/components/CalculatorButton.vue";
 import CalculatorError from "@/components/CalculatorError.vue";
-import { useCalculatorStore } from "@/stores/calculator";
+import CalculatorHeader from "@/components/CalculatorHeader.vue";
+import CalculatorInput from "@/components/CalculatorInput.vue";
+import HistoryRow from "@/components/HistoryRow.vue";
 import { useCalculatorInput } from "@/composables/useCalculatorInput";
+import { useCalculatorStore } from "@/stores/calculator";
 
 const store = useCalculatorStore();
 
