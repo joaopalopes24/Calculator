@@ -1,13 +1,10 @@
 <script setup lang="ts">
 // ** External Imports
-import { computed, nextTick, useTemplateRef } from "vue";
 import { get } from "es-toolkit/compat";
+import { computed, nextTick, useTemplateRef } from "vue";
 
 // ** Local Imports
-import {
-  KEY_TO_CHAR,
-  useCalculatorInput,
-} from "@/composables/useCalculatorInput";
+import { KEY_TO_CHAR } from "@/composables/useCalculatorInput";
 import { useCalculatorStore } from "@/stores/calculator";
 
 const props = defineProps({
@@ -84,6 +81,6 @@ const inputModel = computed({
     spellcheck="false"
     v-model="inputModel"
     autocapitalize="off"
-    class="min-h-14 w-full flex items-center justify-end text-neutral-100 text-2xl font-light tracking-tight shrink-0 pt-3 bg-transparent border-none outline-none text-right placeholder-neutral-500"
+    class="min-h-14 w-full flex items-center justify-end text-neutral-900 dark:text-neutral-100 text-2xl font-light tracking-tight shrink-0 pt-3 bg-transparent border-none outline-none text-right placeholder-neutral-400 dark:placeholder-neutral-500"
   />
 </template>

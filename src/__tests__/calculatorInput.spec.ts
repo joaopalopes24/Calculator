@@ -1,14 +1,14 @@
 // ** External Imports
-import { describe, it, expect, beforeEach } from "vitest";
 import { mount } from "@vue/test-utils";
-import { h, defineComponent } from "vue";
 import { createPinia, setActivePinia } from "pinia";
+import { beforeEach, describe, expect, test } from "vitest";
+import { defineComponent, h } from "vue";
 
 // ** Local Imports
 import App from "@/App.vue";
-import { useCalculatorStore } from "@/stores/calculator";
-import { useCalculatorInput } from "@/composables/useCalculatorInput";
 import HistoryRow from "@/components/HistoryRow.vue";
+import { useCalculatorInput } from "@/composables/useCalculatorInput";
+import { useCalculatorStore } from "@/stores/calculator";
 
 const KeyboardTestWrapper = defineComponent({
   setup() {
@@ -40,7 +40,7 @@ describe("calculator button clicks", () => {
     return { wrapper, store, pinia };
   }
 
-  it("updates expression when digit button is clicked", async () => {
+  test("it should update expression when digit button is clicked", async () => {
     const { wrapper, store } = mountApp();
 
     const digit7 = findButtonByText(wrapper, "7");
@@ -52,7 +52,7 @@ describe("calculator button clicks", () => {
     expect(store.expression).toBe("7");
   });
 
-  it("appends to expression when multiple buttons are clicked", async () => {
+  test("it should append to expression when multiple buttons are clicked", async () => {
     const { wrapper, store } = mountApp();
 
     const one = findButtonByText(wrapper, "1");
@@ -66,7 +66,7 @@ describe("calculator button clicks", () => {
     expect(store.expression).toBe("1+2");
   });
 
-  it("clears expression when C is clicked", async () => {
+  test("it should clear expression when C is clicked", async () => {
     const { wrapper, store } = mountApp();
 
     store.pushExpression("1+2");
@@ -78,7 +78,7 @@ describe("calculator button clicks", () => {
     expect(store.expression).toBe("");
   });
 
-  it("evaluates and adds to history when = is clicked", async () => {
+  test("it should evaluate and add to history when = is clicked", async () => {
     const { wrapper, store } = mountApp();
 
     store.replaceExpression("2+3");
@@ -99,7 +99,7 @@ describe("calculator keyboard (outside input)", () => {
     setActivePinia(createPinia());
   });
 
-  it("calls handleEquals on Enter when window receives keydown", async () => {
+  test("it should call handleEquals on Enter when window receives keydown", async () => {
     const pinia = createPinia();
     setActivePinia(pinia);
     const store = useCalculatorStore(pinia);
@@ -118,7 +118,7 @@ describe("calculator keyboard (outside input)", () => {
     expect(store.history[0]?.result).toBe("7");
   });
 
-  it("removes last character on Backspace when target is not input", async () => {
+  test("it should remove last character on Backspace when target is not input", async () => {
     const pinia = createPinia();
     setActivePinia(pinia);
     const store = useCalculatorStore(pinia);
@@ -136,7 +136,7 @@ describe("calculator keyboard (outside input)", () => {
     expect(store.expression).toBe("12");
   });
 
-  it("pushes digit when number key is pressed and target is not input", async () => {
+  test("it should push digit when number key is pressed and target is not input", async () => {
     const pinia = createPinia();
     setActivePinia(pinia);
     const store = useCalculatorStore(pinia);
@@ -158,7 +158,7 @@ describe("calculator history", () => {
     setActivePinia(createPinia());
   });
 
-  it("Clear All button clears history", async () => {
+  test("it should clear history when Clear All button is clicked", async () => {
     const pinia = createPinia();
     const wrapper = mount(App, { global: { plugins: [pinia] } });
     const store = useCalculatorStore(pinia);
@@ -179,7 +179,7 @@ describe("HistoryRow", () => {
     setActivePinia(createPinia());
   });
 
-  it("replaces expression when row is clicked", async () => {
+  test("it should replace expression when row is clicked", async () => {
     const pinia = createPinia();
     const store = useCalculatorStore(pinia);
 
@@ -197,7 +197,7 @@ describe("HistoryRow", () => {
     expect(store.expression).toBe("1+2");
   });
 
-  it("removes item from history when delete button is clicked", async () => {
+  test("it should remove item from history when delete button is clicked", async () => {
     const pinia = createPinia();
     const store = useCalculatorStore(pinia);
 

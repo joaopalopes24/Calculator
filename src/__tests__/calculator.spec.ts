@@ -1,6 +1,6 @@
 // ** External Imports
-import { describe, it, expect, beforeEach } from "vitest";
-import { setActivePinia, createPinia } from "pinia";
+import { createPinia, setActivePinia } from "pinia";
+import { beforeEach, describe, expect, test } from "vitest";
 
 // ** Local Imports
 import { useCalculatorStore } from "@/stores/calculator";
@@ -11,7 +11,7 @@ describe("calculator store", () => {
   });
 
   describe("expression", () => {
-    it("pushExpression appends characters", () => {
+    test("it should append characters when pushExpression is called", () => {
       const store = useCalculatorStore();
 
       store.pushExpression("1");
@@ -21,7 +21,7 @@ describe("calculator store", () => {
       expect(store.expression).toBe("1+2");
     });
 
-    it("clearExpression resets expression", () => {
+    test("it should reset expression when clearExpression is called", () => {
       const store = useCalculatorStore();
 
       store.pushExpression("1+2");
@@ -30,7 +30,7 @@ describe("calculator store", () => {
       expect(store.expression).toBe("");
     });
 
-    it("replaceExpression sets expression", () => {
+    test("it should set expression when replaceExpression is called", () => {
       const store = useCalculatorStore();
 
       store.pushExpression("1+2");
@@ -39,7 +39,7 @@ describe("calculator store", () => {
       expect(store.expression).toBe("9");
     });
 
-    it("removeLastCharacter removes one character", () => {
+    test("it should remove one character when removeLastCharacter is called", () => {
       const store = useCalculatorStore();
 
       store.pushExpression("123");
@@ -54,7 +54,7 @@ describe("calculator store", () => {
   });
 
   describe("history", () => {
-    it("addToHistory appends item", () => {
+    test("it should append item when addToHistory is called", () => {
       const store = useCalculatorStore();
 
       expect(store.history).toHaveLength(0);
@@ -70,7 +70,7 @@ describe("calculator store", () => {
       expect(store.history[1]).toEqual({ expression: "2×3", result: "6" });
     });
 
-    it("clearHistory removes all items", () => {
+    test("it should remove all items when clearHistory is called", () => {
       const store = useCalculatorStore();
 
       store.addToHistory("1+2", "3");
@@ -80,7 +80,7 @@ describe("calculator store", () => {
       expect(store.history).toHaveLength(0);
     });
 
-    it("removeFromHistory removes item at index", () => {
+    test("it should remove item at index when removeFromHistory is called", () => {
       const store = useCalculatorStore();
 
       store.addToHistory("1+2", "3");
@@ -93,7 +93,7 @@ describe("calculator store", () => {
       expect(store.history[1]).toEqual({ expression: "4+5", result: "9" });
     });
 
-    it("removeFromHistory(0) removes first item", () => {
+    test("it should remove first item when removeFromHistory(0) is called", () => {
       const store = useCalculatorStore();
 
       store.addToHistory("a", "1");
@@ -104,7 +104,7 @@ describe("calculator store", () => {
       expect(store.history[0]?.expression).toBe("b");
     });
 
-    it("removeFromHistory last index removes last item", () => {
+    test("it should remove last item when removeFromHistory last index is called", () => {
       const store = useCalculatorStore();
 
       store.addToHistory("a", "1");
@@ -117,7 +117,7 @@ describe("calculator store", () => {
   });
 
   describe("error", () => {
-    it("setError and clearError update errorMessage", () => {
+    test("it should update errorMessage when setError and clearError are called", () => {
       const store = useCalculatorStore();
 
       expect(store.errorMessage).toBeNull();

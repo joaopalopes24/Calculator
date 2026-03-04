@@ -14,7 +14,7 @@ const { errorMessage } = storeToRefs(store);
   <p
     role="alert"
     v-if="errorMessage"
-    class="absolute bottom-1 left-5 right-5 text-sm text-red-400 text-right pointer-events-none"
+    class="absolute bottom-1 left-5 right-5 text-sm text-red-600 dark:text-red-400 text-right pointer-events-none"
   >
     {{ errorMessage }}
   </p>

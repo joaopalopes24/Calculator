@@ -3,13 +3,16 @@
 import { storeToRefs } from "pinia";
 
 // ** Local Imports
-import CalculatorHeader from "@/components/CalculatorHeader.vue";
-import HistoryRow from "@/components/HistoryRow.vue";
-import CalculatorInput from "@/components/CalculatorInput.vue";
 import CalculatorButton from "@/components/CalculatorButton.vue";
 import CalculatorError from "@/components/CalculatorError.vue";
-import { useCalculatorStore } from "@/stores/calculator";
+import CalculatorHeader from "@/components/CalculatorHeader.vue";
+import CalculatorInput from "@/components/CalculatorInput.vue";
+import HistoryRow from "@/components/HistoryRow.vue";
 import { useCalculatorInput } from "@/composables/useCalculatorInput";
+import { useTheme } from "@/composables/useTheme";
+import { useCalculatorStore } from "@/stores/calculator";
+
+useTheme();
 
 const store = useCalculatorStore();
 
@@ -20,10 +23,10 @@ const { handlePress } = useCalculatorInput();
 
 <template>
   <div
-    class="min-h-screen bg-neutral-900 flex flex-col items-center justify-center p-4"
+    class="min-h-screen bg-neutral-100 dark:bg-neutral-900 flex flex-col items-center justify-center p-4"
   >
     <div
-      class="w-full max-w-sm rounded-2xl overflow-hidden border border-neutral-700 bg-neutral-800 shadow-lg"
+      class="w-full max-w-sm rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-lg"
     >
       <CalculatorHeader />
 
@@ -47,7 +50,7 @@ const { handlePress } = useCalculatorInput();
         <CalculatorError />
       </section>
 
-      <div class="border-t border-neutral-700 p-3">
+      <div class="border-t border-neutral-200 dark:border-neutral-700 p-3">
         <div class="grid grid-cols-5 grid-auto-rows-[3.5rem] gap-2">
           <!-- Row 1 -->
           <CalculatorButton char="C" variant="clear" v-on:press="handlePress">
